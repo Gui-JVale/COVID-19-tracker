@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { fetchDataStartAsync } from './redux/data/data.actions';
+import { fetchDataStart } from './redux/data/data.actions';
 import { getCurrentDate } from './redux/time/time.actions';
 import { selectCurrentDate, selectYesterdayDate } from './redux/time/time.selectors';
 
@@ -16,8 +16,8 @@ class App extends React.Component {
 
   // Fetch Data and convert to json
   componentDidMount() {
-    const { fetchDataStartAsync, currentDate } = this.props;
-    fetchDataStartAsync(currentDate);
+    const { fetchDataStart, currentDate } = this.props;
+    fetchDataStart();
   }
 
   render() {
@@ -36,7 +36,7 @@ const mapStateToProps = createStructuredSelector ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchDataStartAsync: currentDate => dispatch(fetchDataStartAsync(currentDate)),
+  fetchDataStart: () => dispatch(fetchDataStart()),
   getCurrentDate: () => dispatch(getCurrentDate()),
 });
 
