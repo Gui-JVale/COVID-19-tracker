@@ -1,0 +1,28 @@
+@import "../../sass/abstracts/_variables"
+.location-info
+  padding: 1rem
+  background-color: $color-primary-light-3
+  margin-bottom: 1rem
+  border-radius: 3px
+
+  &__name,
+  &__numbers
+    display: block
+
+  &__name
+    color: $color-grey-light-1
+    font-size: 120%
+
+  &__numbers
+
+    &--confirmed
+      color: $color-grey-light-2
+
+    &--recovered
+      color: $color-green
+
+    &--deaths
+      color: $color-red
+
+  &__number
+    color: $color-grey-dark-2
