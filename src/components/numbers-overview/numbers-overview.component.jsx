@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './numbers-overview.styles.sass';
 
@@ -15,8 +16,8 @@ const NumbersOverview = ({totalNumbers}) => (
   </div>
 )
 
-const mapStateToProps = state => ({
-  totalNumbers: selectTotalNumbers(state),
+const mapStateToProps = createStructuredSelector({
+  totalNumbers: selectTotalNumbers,
 });
 
 export default connect(mapStateToProps)(NumbersOverview);

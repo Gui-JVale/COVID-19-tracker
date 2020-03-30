@@ -4,20 +4,20 @@ const selectData = state => state.data;
 
 export const selectInitialData = createSelector(
   [selectData],
-  data => (data ? data.initialData : null)
+  data => (data.initialData ? data.initialData : [])
 );
 
 export const selectSortedData = createSelector(
   [selectData],
-  data => (data ? data.sortedData : null)
+  data => (data.sortedData ? data.sortedData : [])
 )
 
 export const selectTotalNumbers = createSelector(
   [selectData],
-  data => (data ? data.totalNumbers : null)
+  data => (data.totalNumbers ? data.totalNumbers : [])
 );
 
-export const selectLoadingState = createSelector(
+export const selectIsDataFetching = createSelector(
   [selectData],
-  data => data.isLoading
+  data => data.isFetching
 );

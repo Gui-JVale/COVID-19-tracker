@@ -4,15 +4,20 @@ import { getFormatedTotal, sortByMostCases, searchArr } from './data.utils'
 const INITIAL_STATE = {
   initialData: null,
   totalNumbers: null,
-  isLoading: true
+  isFetching: false,
+  errorMessage: '',
 }
 
 const dataReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
-    case DataActionTypes.SET_INITIAL_DATA:
+    case DataActionTypes.FETCH_DATA_START:
+      return {...state, isFetching: true};
+
+    case DataActionTypes.FETCH_DATA_SUCCESS:
       return {
         ...state, 
+        isFetching: false,
         initialData: action.payload,
         sortedData: sortByMostCases(action.payload),
         totalNumbers: [
@@ -29,11 +34,14 @@ const dataReducer = (state = INITIAL_STATE, action) => {
             number: getFormatedTotal(action.payload, "Deaths")
           }
         ],
-        isLoading: false
       }
 
-      case DataActionTypes.SET_LOADING_STATE:
-        return {...state, isLoading: action.payload}
+    case DataActionTypes.FETCH_DATA_FAILURE:
+      return {
+        ...state, 
+        isFetching: false,
+        errorMessage: action.payload
+      }
     
     case DataActionTypes.SEARCH_LOCATIONS:
       return {...state, sortedData: searchArr(state.initialData, action.payload)}

@@ -1,9 +1,10 @@
 import React from 'react'; 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './side-bar.styles.sass';
 
-import { selectLoadingState } from '../../redux/data/data.selectors';
+import { selectIsDataFetching } from '../../redux/data/data.selectors';
 
 import WithSpinner from '../with-spinner/with-spinner.component';
 
@@ -13,16 +14,16 @@ import LocationsOverview from '../locations-overview/locations-overview.componen
 const NumbersOverviewWithSpinner = WithSpinner(NumbersOverview)
 const LocationsOverviewWithSpinner = WithSpinner(LocationsOverview)
 
-const SideBar = ({ isLoading }) => {
+const SideBar = ({ isDataFetching }) => {
   return (
     <div className="side-bar">
-      <NumbersOverviewWithSpinner isLoading={isLoading} />
-      <LocationsOverviewWithSpinner isLoading={isLoading} />
+      <NumbersOverviewWithSpinner isLoading={isDataFetching} />
+      <LocationsOverviewWithSpinner isLoading={isDataFetching} />
     </div>
 )};
 
-const mapStateToProps = state => ({
-  isLoading: selectLoadingState(state)
+const mapStateToProps = createStructuredSelector({
+  isDataFetching: selectIsDataFetching
 })
 
 export default connect(mapStateToProps)(SideBar);

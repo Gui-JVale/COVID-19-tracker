@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'; 
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { selectInitialData, selectTotalNumbers } from '../../redux/data/data.selectors';
 
@@ -88,9 +89,9 @@ const MapComponent = ({ initialData, totalNumbers }) => {
 
 }
 
-const mapStateToProps = state => ({
-  initialData: selectInitialData(state),
-  totalNumbers: selectTotalNumbers(state)
+const mapStateToProps = createStructuredSelector({
+  initialData: selectInitialData,
+  totalNumbers: selectTotalNumbers
 
 });
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './main.styles.sass';
 
-import { selectLoadingState } from '../../redux/data/data.selectors';
+import { selectIsDataFetching } from '../../redux/data/data.selectors';
 
 import WithSpinner from '../with-spinner/with-spinner.component';
 
@@ -12,15 +13,15 @@ import SideBar from '../side-bar/side-bar.component';
 
 const MapComponentWithSpinner = WithSpinner(MapComponent);
 
-const Main = ({ isLoading }) => (
+const Main = ({ isDataFetching }) => (
   <div className="main">
     <SideBar/>
-    <MapComponentWithSpinner isLoading={isLoading}  />
+    <MapComponentWithSpinner isLoading={isDataFetching}  />
   </div>
 );
 
-const mapStateToProps = state => ({
-  isLoading: selectLoadingState(state)
+const mapStateToProps = createStructuredSelector({
+  isDataFetching: selectIsDataFetching 
 })
 
 export default connect(mapStateToProps)(Main);
